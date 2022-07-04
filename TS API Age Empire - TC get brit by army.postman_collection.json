@@ -1,0 +1,161 @@
+{
+	"info": {
+		"_postman_id": "04900c6d-50c7-4130-9f29-b80e719c36a2",
+		"name": "TS API Age Empire | TC get brit by army",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21638608"
+	},
+	"item": [
+		{
+			"name": "Civilizations",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const body = pm.response.json()\r",
+							"\r",
+							"const britons = body.civilizations[1]\r",
+							"const civil = britons.name\r",
+							"const army = britons.army_type\r",
+							"\r",
+							"pm.test(\"Test civilization is Britons\",()=>\r",
+							"{\r",
+							"    pm.expect(civil).to.be.eql(\"Britons\")\r",
+							"})\r",
+							"pm.test(\"Test army type is Foot Archer\",()=>\r",
+							"{\r",
+							"    pm.expect(army).to.be.eql(\"Foot Archer\")\r",
+							"})\r",
+							"\r",
+							"console.log(army)"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://age-of-empires-2-api.herokuapp.com/api/v1/civilizations",
+					"protocol": "https",
+					"host": [
+						"age-of-empires-2-api",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"civilizations"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Civilization Britons Only",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const body = pm.response.json()\r",
+							"\r",
+							"const civil = body.name \r",
+							"const army = body.army_type\r",
+							"\r",
+							"pm.test(\"Test civilization is Britons\",()=>\r",
+							"{\r",
+							"    pm.expect(civil).to.be.eql(\"Britons\")\r",
+							"})\r",
+							"pm.test(\"Test army type is Foot Archer\",()=>\r",
+							"{\r",
+							"    pm.expect(army).to.be.eql(\"Foot Archer\")\r",
+							"})\r",
+							"\r",
+							"console.log(army)"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://age-of-empires-2-api.herokuapp.com/api/v1/civilization/:Id",
+					"protocol": "https",
+					"host": [
+						"age-of-empires-2-api",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"civilization",
+						":Id"
+					],
+					"variable": [
+						{
+							"key": "Id",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Find Britons by ArmyType",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const body = pm.response.json()\r",
+							"\r",
+							"const civils = body.civilizations\r",
+							"const britons = civils.find(i => i.army_type === \"Foot Archer\")\r",
+							"const name = britons.name\r",
+							"const army = britons.army_type\r",
+							"\r",
+							"pm.test(\"Test civilization is Britons\",()=>\r",
+							"{\r",
+							"    pm.expect(name).to.be.eql(\"Britons\")\r",
+							"})\r",
+							"pm.test(\"Test army type is Foot Archer\",()=>\r",
+							"{\r",
+							"    pm.expect(army).to.be.eql(\"Foot Archer\")\r",
+							"})\r",
+							"\r",
+							"console.log(britons)"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://age-of-empires-2-api.herokuapp.com/api/v1/civilizations",
+					"protocol": "https",
+					"host": [
+						"age-of-empires-2-api",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"civilizations"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
